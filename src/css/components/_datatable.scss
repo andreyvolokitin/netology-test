@@ -96,7 +96,7 @@ td > .datatable__table-cell {
   max-width: 150px;
   word-wrap: break-word;
 
-  @media screen and (min-width: 420px) {
+  @media screen and (min-width: bp(bp420px)) {
     max-width: 250px;
     }
   }

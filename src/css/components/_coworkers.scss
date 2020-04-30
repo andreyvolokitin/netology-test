@@ -2,17 +2,44 @@
 .coworkers__foot {
   padding: 0 $horizontal-padding-primary;
   }
+
 .coworkers__data,
 .coworkers__foot {
   margin: 0 -#{$horizontal-padding-primary};
   }
+
 .coworkers {
   padding-top: 20px;
   }
+
 .coworkers__head {
   margin: 0 0 1em;
   }
+
 .coworkers__foot {
   padding-top: 1.2em;
   padding-bottom: 1.2em;
+  }
+
+.coworkers__details {
+  margin-right: 10px;
+  }
+
+.coworkers__to-top {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  visibility: hidden;
+
+  @media screen and (min-width: bp(bp420px)) {
+    position: relative;
+    right: auto;
+    top: auto;
+    transform: none;
+    }
+  }
+
+.coworkers.is-scrolled .coworkers__to-top {
+  visibility: visible;
   }

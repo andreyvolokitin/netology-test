@@ -60,5 +60,5 @@ $horizontal-padding-primary: 1.125em;
 /// This mechanism should not be abused because it has limited applicability — it works only for
 /// simple media queries like single max/min-width. Ranges or combined queries are not supported.
 $breakpoints: (
-  bp500px: 500px,
+  bp420px: 420px,
 ) !default;
