@@ -21,11 +21,13 @@
   padding-bottom: 1.2em;
   }
 
-.coworkers__details {
+.coworkers__details,
+.coworkers__details.MuiIconButton-root {
   margin-right: 10px;
   }
 
-.coworkers__to-top {
+.coworkers__to-top,
+.coworkers__to-top.MuiIconButton-root {
   position: absolute;
   right: 0;
   top: 50%;
