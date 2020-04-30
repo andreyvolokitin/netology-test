@@ -22,7 +22,7 @@ function Coworkers({ data, datatableStore }) {
   );
 
   function scrollToFooter() {
-    footerEl.scrollIntoView({ behavior: 'smooth' });
+    footerEl.scrollIntoView({ behavior: 'smooth', block: 'end', inline: 'nearest' });
   }
   function scrollToHeader() {
     headerEl.scrollIntoView({ behavior: 'smooth' });
