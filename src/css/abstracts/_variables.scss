@@ -1,0 +1,64 @@
+// -----------------------------------------------------------------------------
+// This file contains all application-wide variables.
+// -----------------------------------------------------------------------------
+
+/// Variable names may contain a suffix like `bp1213px`. Such suffix means
+/// that starting from this breakpoint this variable is applied in the code (inside media queries)
+/// instead of a variable with original name (without suffix).
+/// I.e. `$my-variable_lte-bp1213px` instead of `$my-variable`.
+///
+/// `lte-` and `gre-`, in the variable name means "less/greater than, or equal",
+/// and describes screen widths for which the variable applies. This depends on the design order
+/// (desktop-first, or mobile-first), i.e. the variable changed inside 500px breakpoint should be named:
+/// - "lte-bp950px" for desktop-first (@media screen and (max-width: 500px));
+/// - "gte-bp950px" for mobile-first (@media screen and (min-width: 500px)).
+
+/// Font stacks
+$text-font-stack: -apple-system, 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Oxygen-Sans', 'Ubuntu',
+  'Cantarell', 'Helvetica Neue', sans-serif !default;
+
+/// Font properties
+$font-size-primary: 16px;
+$line-height-primary: 1.4;
+
+$selection-color: #b3d4fc !default;
+$text-color: #333 !default;
+
+$horizontal-padding-primary: 1.125em;
+
+
+
+
+
+
+
+
+
+/// Breakpoints map. Values are content-based and sorted in design order
+/// (desktop-first, or mobile-first).
+///
+/// Due to a large amount of breakpoints it is impossible to give all
+/// of them meaningful names. Instead breakpoints are named with the
+/// breakpoint value prefixed with a "bp", i.e. "bp1280px". Breakpoint values
+/// are used in the code via `bp()` function like so:
+/// `@media screen and (max-width: bp(bp1110px))`.
+///
+/// To refactor a breakpoint you should change its value and then use a global
+/// "Find and replace" search in the IDE/code editor to search and edit breakpoint name
+/// (i.e. search `bp1213px` and change it to `bp1300px`). This will also affect
+/// global variable names, because they may contain a suffix like `bp1213px`
+/// which also should be edited. Such suffix means that starting from this breakpoint
+/// this variable is applied in the code (inside media queries) instead of a variable
+/// with original name (without suffix). I.e. `$my-variable_lte-bp1213px` instead of `$my-variable`.
+///
+/// `lte-` and `gte-`, in the variable name means "less/greater than, or equal",
+/// and describes screen widths for which the variable applies. This depends on the design order
+/// (desktop-first, or mobile-first), i.e. the variable changed inside 500px breakpoint should be named:
+/// - "lte-bp950px" for desktop-first (@media screen and (max-width: 500px));
+/// - "gte-bp950px" for mobile-first (@media screen and (min-width: 500px)).
+///
+/// This mechanism should not be abused because it has limited applicability — it works only for
+/// simple media queries like single max/min-width. Ranges or combined queries are not supported.
+$breakpoints: (
+  bp500px: 500px,
+) !default;

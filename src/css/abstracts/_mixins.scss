@@ -1,0 +1,28 @@
+// -----------------------------------------------------------------------------
+// This file contains all application-wide Sass mixins.
+// -----------------------------------------------------------------------------
+// stylelint-disable media-feature-name-no-unknown, no-descending-specificity
+
+
+@mixin only-ff($selector, $map){
+	@-moz-document url-prefix() {
+		#{$selector} {
+			@each $property, $value in ($map) {
+				#{$property}: $value;
+			}
+		}
+	}
+}
+
+
+@mixin focus-ring {
+  box-shadow: 0 0 2px 3px rgba(52, 177, 235, .6);
+  outline: none;
+  }
+@mixin disabled {
+  cursor: default;
+  opacity: .7;
+  }
+
+
+

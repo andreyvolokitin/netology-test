@@ -1,0 +1,18 @@
+.coworkers,
+.coworkers__foot {
+  padding: 0 $horizontal-padding-primary;
+  }
+.coworkers__data,
+.coworkers__foot {
+  margin: 0 -#{$horizontal-padding-primary};
+  }
+.coworkers {
+  padding-top: 20px;
+  }
+.coworkers__head {
+  margin: 0 0 1em;
+  }
+.coworkers__foot {
+  padding-top: 1.2em;
+  padding-bottom: 1.2em;
+  }
