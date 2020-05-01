@@ -25,23 +25,3 @@
 .coworkers__details.MuiIconButton-root {
   margin-right: 10px;
   }
-
-.coworkers__to-top,
-.coworkers__to-top.MuiIconButton-root {
-  position: absolute;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  visibility: hidden;
-
-  @media screen and (min-width: bp(bp420px)) {
-    position: relative;
-    right: auto;
-    top: auto;
-    transform: none;
-    }
-  }
-
-.coworkers.is-scrolled .coworkers__to-top {
-  visibility: visible;
-  }

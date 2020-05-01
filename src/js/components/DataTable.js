@@ -1,11 +1,13 @@
 /* eslint-disable no-shadow */
 
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { connect } from 'react-redux';
-import { Checkbox, FormControlLabel, CircularProgress } from '@material-ui/core';
+import { Checkbox, FormControlLabel, CircularProgress, IconButton } from '@material-ui/core';
+import { ArrowUpward } from '@material-ui/icons';
 import Modernizr from 'modernizr';
 import Stickyfill from 'stickyfilljs';
 import { nanoid } from 'nanoid/non-secure';
+import { debounce } from 'throttle-debounce';
 
 import Scroll from './Scroll';
 import { fetchDatatable, markDatatableRow, markDatatableFull } from '../redux/actions';
@@ -26,11 +28,41 @@ function DataTable({
       Stickyfill.add(node);
     }
   }, []);
+  const theadRef = useRef(null);
+  const headerAnchorRef = useRef(null);
+  let containerRef;
+
+  function scrollToHeader() {
+    headerAnchorRef.current.scrollIntoView({ behavior: 'smooth' });
+  }
 
   useEffect(() => {
     if (typeof data === 'string') {
       fetchDatatable(tableId, data);
     }
+
+    const container = containerRef;
+    const refresh = debounce(50, () => {
+      // don't use IntersectionObserver due to support for older browsers,
+      // and lack of time to implement 2 solutions
+      const rect = theadRef.current.getBoundingClientRect();
+
+      container.classList[
+        rect.top >= 0 &&
+        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight)
+          ? 'remove'
+          : 'add'
+      ]('is-scrolled');
+    });
+
+    window.addEventListener('scroll', refresh);
+    window.addEventListener('resize', refresh);
+    window.addEventListener('orientationchange', refresh);
+    return () => {
+      window.removeEventListener('scroll', refresh);
+      window.removeEventListener('resize', refresh);
+      window.removeEventListener('orientationchange', refresh);
+    };
   }, []);
 
   const [cellId] = useState(nanoid);
@@ -66,6 +98,7 @@ function DataTable({
       /* eslint-disable no-return-assign */
       content = (
         <>
+          <div ref={headerAnchorRef} className="datatable__scroll-anchor"></div>
           <div className="datatable__data">
             <div ref={headerRef} className="datatable__head sticky">
               <FormControlLabel
@@ -81,11 +114,20 @@ function DataTable({
                 }
                 label="Выделить всё"
               />
-              {headerSecondaryContent}
+              <>
+                {headerSecondaryContent}
+                <IconButton
+                  className="datatable__to-top"
+                  onClick={scrollToHeader}
+                  aria-label="В начало"
+                >
+                  <ArrowUpward />
+                </IconButton>
+              </>
             </div>
             <Scroll className="datatable__content" direction="h">
               <table className="datatable__table table">
-                <thead>
+                <thead ref={theadRef}>
                   <tr>
                     <th className="datatable__table-head">
                       <div className="datatable__table-cell"></div>
@@ -141,7 +183,13 @@ function DataTable({
     return content;
   }
 
-  return <div className={`${className} datatable`}>{getContent()}</div>;
+  return (
+    /* eslint-disable no-return-assign */
+    <div ref={(r) => (containerRef = r)} className={`${className} datatable`}>
+      {getContent()}
+    </div>
+    /* eslint-enable */
+  );
 }
 
 const mapStateToProps = (state) => {
