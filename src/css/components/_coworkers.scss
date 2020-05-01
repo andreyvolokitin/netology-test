@@ -23,5 +23,7 @@
 
 .coworkers__details,
 .coworkers__details.MuiButton-root {
-  margin-right: 10px;
+  @media screen and (min-width: bp(bp420px)) {
+    margin-right: 10px;
+    }
   }
