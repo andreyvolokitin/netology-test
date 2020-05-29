@@ -1,4 +1,4 @@
-import { API, FETCH_DATATABLE, MARK_DATATABLE_FULL, MARK_DATATABLE_ROW } from './actionTypes';
+import { API, DATATABLE_FETCH, DATATABLE_MARK_FULL, DATATABLE_MARK_ROW } from './actionTypes';
 
 export const apiPending = () => ({
   type: API.PENDING,
@@ -15,13 +15,13 @@ export const apiError = (error) => ({
 
 export const fetchDatatable = (tableId, url) => ({
   type: API,
-  payload: Object.assign({ tableId, url }, FETCH_DATATABLE),
+  payload: Object.assign({ tableId, url }, DATATABLE_FETCH),
 });
 export const markDatatableRow = (tableId, rowId, marked) => ({
-  type: MARK_DATATABLE_ROW,
+  type: DATATABLE_MARK_ROW,
   payload: { tableId, rowId, marked },
 });
 export const markDatatableFull = (tableId, marked) => ({
-  type: MARK_DATATABLE_FULL,
+  type: DATATABLE_MARK_FULL,
   payload: { tableId, marked },
 });

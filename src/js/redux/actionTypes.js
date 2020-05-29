@@ -7,6 +7,6 @@ const asyncActionType = (type) => ({
 
 export const API = asyncActionType('API');
 
-export const FETCH_DATATABLE = asyncActionType('FETCH_DATATABLE');
-export const MARK_DATATABLE_ROW = 'MARK_DATATABLE_ROW';
-export const MARK_DATATABLE_FULL = 'MARK_DATATABLE_FULL';
+export const DATATABLE_FETCH = asyncActionType('DATATABLE_FETCH');
+export const DATATABLE_MARK_ROW = 'DATATABLE_MARK_ROW';
+export const DATATABLE_MARK_FULL = 'DATATABLE_MARK_FULL';

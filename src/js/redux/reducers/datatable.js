@@ -1,29 +1,29 @@
-import { FETCH_DATATABLE, MARK_DATATABLE_ROW, MARK_DATATABLE_FULL } from '../actionTypes';
+import { DATATABLE_FETCH, DATATABLE_MARK_ROW, DATATABLE_MARK_FULL } from '../actionTypes';
 
 export default function datatable(datatables = {}, action) {
   const { type, payload } = action;
 
   switch (type) {
-    case FETCH_DATATABLE.PENDING:
+    case DATATABLE_FETCH.PENDING:
       return Object.assign({}, datatables, {
         [payload.tableId]: {
           status: 'pending',
         },
       });
-    case FETCH_DATATABLE.ERROR:
+    case DATATABLE_FETCH.ERROR:
       return Object.assign({}, datatables, {
         [payload.tableId]: {
           status: 'error',
         },
       });
-    case FETCH_DATATABLE.SUCCESS:
+    case DATATABLE_FETCH.SUCCESS:
       return Object.assign({}, datatables, {
         [payload.tableId]: {
           status: 'success',
           data: payload.data,
         },
       });
-    case MARK_DATATABLE_ROW:
+    case DATATABLE_MARK_ROW:
       return {
         ...datatables,
         [payload.tableId]: Object.assign({}, datatables[payload.tableId], {
@@ -39,7 +39,7 @@ export default function datatable(datatables = {}, action) {
           }),
         }),
       };
-    case MARK_DATATABLE_FULL:
+    case DATATABLE_MARK_FULL:
       return {
         ...datatables,
         [payload.tableId]: Object.assign({}, datatables[payload.tableId], {
